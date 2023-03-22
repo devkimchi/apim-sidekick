@@ -5,23 +5,23 @@
 
 <div class="card">
     <div class="card-body">
-        <button class="btn btn-primary" @onclick="OnAccessTokenClickedAsync">액세스 토큰</button>
+        <button class="btn btn-primary" @onclick="OnAccessTokenClickedAsync">Access Token</button>
         @if (accessTokenLink == null)
         {
-            <span class="btn btn-info">액세스 토큰 직링크</span>
+            <span class="btn btn-info">Direct Link to Access Token</span>
         }
         else
         {
-            <a class="btn btn-info" href="@accessTokenLink" target="_blank">액세스 토큰 직링크</a>
+            <a class="btn btn-info" href="@accessTokenLink" target="_blank">Direct Link to Access Token</a>
         }
-        <button class="btn btn-success" @onclick="OnProfileClickedAsync">카카오 프로필</button>
+        <button class="btn btn-success" @onclick="OnProfileClickedAsync">Kakao Profile</button>
     </div>
     <ul class="list-group">
         <li class="list-group-item">
             Token:
             @if (accessToken == null)
             {
-                <span class="text-danger">위 버튼을 클릭해서 액세스 토큰을 가져오세요</span>
+                <span class="text-danger">Click the button above to get the access token</span>
             }
             else
             {
@@ -30,12 +30,12 @@
         </li>
         @if (profile == null)
         {
-            <li class="list-group-item">위 버튼을 클릭해서 카카오 프로필을 가져오세요</li>
+            <li class="list-group-item">Click the button above to get the Kakao profile</li>
         }
         else
         {
-            <li class="list-group-item">닉네임: @profile.NickName</li>
-            <li class="list-group-item">프사: <img src="@profile.ProfileImageURL" /></li>
+            <li class="list-group-item">Nickname: @profile.NickName</li>
+            <li class="list-group-item">Profile image: <img src="@profile.ProfileImageURL" /></li>
         }
     </ul>
 </div>
