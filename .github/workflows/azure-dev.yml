@@ -12,7 +12,6 @@ on:
 permissions: write-all
 
 jobs:
-  # GitHub Push #
   call_build_test_upload:
     uses: ./.github/workflows/workflow_call_build_test_upload.yml
     with:
@@ -20,7 +19,6 @@ jobs:
       is_pullrequest: 'false'
 
   call_deploy_fncapp:
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/workflow_call_deploy_fncapp.yml
     needs:
     - call_build_test_upload
@@ -29,7 +27,6 @@ jobs:
       artifact_name: 'app'
 
   call_deploy_sttapp:
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/workflow_call_deploy_sttapp.yml
     needs:
     - call_build_test_upload
