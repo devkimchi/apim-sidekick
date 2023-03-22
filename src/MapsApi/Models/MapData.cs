@@ -1,4 +1,4 @@
-﻿namespace IgniteSpotlight.MapsApi.Models
+﻿namespace ApimSidekick.MapsApi.Models
 {
     /// <summary>
     /// This represents the entity for map data.

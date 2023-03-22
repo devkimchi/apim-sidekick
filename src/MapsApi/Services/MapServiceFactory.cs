@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net.Http;
 
-using IgniteSpotlight.MapsApi.Configs;
+using ApimSidekick.MapsApi.Configs;
 
-namespace IgniteSpotlight.MapsApi.Services
+namespace ApimSidekick.MapsApi.Services
 {
     /// <summary>
     /// This represents the factory entity for <see cref="IMapService"/> instances.
@@ -22,7 +22,7 @@ namespace IgniteSpotlight.MapsApi.Services
             this._services = new Dictionary<string, IMapService>()
             {
                 { MockMapService.Name, new MockMapService(settings, factory) },
-                { NaverMapService.Name, new NaverMapService(settings, factory) },
+                { GoogleMapService.Name, new GoogleMapService(settings, factory) },
             };
         }
 

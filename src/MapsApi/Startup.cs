@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 
-using IgniteSpotlight.MapsApi.Configs;
-using IgniteSpotlight.MapsApi.Services;
+using ApimSidekick.MapsApi.Configs;
+using ApimSidekick.MapsApi.Services;
 
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Configurations.AppSettings.Extensions;
@@ -12,8 +12,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-[assembly: FunctionsStartup(typeof(IgniteSpotlight.MapsApi.Startup))]
-namespace IgniteSpotlight.MapsApi
+[assembly: FunctionsStartup(typeof(ApimSidekick.MapsApi.Startup))]
+
+namespace ApimSidekick.MapsApi
 {
     /// <summary>
     /// This represents the entity used for startup bootstrapping.
@@ -50,8 +51,8 @@ namespace IgniteSpotlight.MapsApi
                 Info = new OpenApiInfo()
                 {
                     Version = "1.0.0",
-                    Title = "Naver Map API Wrapper",
-                    Description = "This is the facade API for Naver Maps."
+                    Title = "Google Maps API Wrapper",
+                    Description = "This is the facade API for Google Maps."
                 }
             };
 
@@ -68,7 +69,7 @@ namespace IgniteSpotlight.MapsApi
 
         private static void ConfigureClients(IServiceCollection services)
         {
-            services.AddHttpClient("naver");
+            services.AddHttpClient("google");
         }
 
         private static void ConfigureMapServices(IServiceCollection services)

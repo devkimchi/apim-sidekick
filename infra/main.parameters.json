@@ -8,8 +8,11 @@
     "location": {
       "value": "${AZURE_LOCATION}"
     },
-    "gitHubAccessToken": {
-      "value": "${GITHUB_TOKEN}"
+    "gitHubUsername": {
+      "value": "${GITHUB_USERNAME}"
+    },
+    "gitHubRepositoryName": {
+      "value": "${GITHUB_REPOSITORY_NAME}"
     }
   }
 }

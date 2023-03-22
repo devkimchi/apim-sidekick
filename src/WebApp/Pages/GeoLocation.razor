@@ -13,13 +13,13 @@
 else
 {
     <div class="card">
-        <img src="@imageUrl" class="card-img-top" style="width:500px !important; height:500px !important;" alt="현재 위치 - 네이버 맵">
+        <img src="@imageUrl" class="card-img-top" style="width:500px !important; height:500px !important;" alt="Current Location - Google Maps">
         <ul class="list-group">
             <li class="list-group-item">Latitude: @position.Coords.Latitude</li>
             <li class="list-group-item">Longitude: @position.Coords.Longitude</li>
         </ul>
         <div class="card-body">
-            <a class="btn btn-primary" href="/geolocation/live">라이브</a>
+            <a class="btn btn-primary" href="/geolocation/live">Production Page</a>
         </div>
     </div>
 }
@@ -51,9 +51,8 @@ else
     {
         this.position = position;
 
-        // var endpoints = Config.GetSection(EndpointsSettings.Name).Get<EndpointsSettings>();
-        var baseUrl = "https://apim-ignitekr2022.azure-api.net";
-        var imageUrl = $"{baseUrl}/maps/naver/image?lat={position.Coords.Latitude}&long={position.Coords.Longitude}&zoom={12}";
+        var baseUrl = "https://apim-sidekick.azure-api.net";
+        var imageUrl = $"{baseUrl}/maps/google/image?lat={position.Coords.Latitude}&long={position.Coords.Longitude}&zoom={12}";
         this.imageUrl = imageUrl;
 
         StateHasChanged();

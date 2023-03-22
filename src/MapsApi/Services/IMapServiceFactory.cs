@@ -1,4 +1,4 @@
-﻿namespace IgniteSpotlight.MapsApi.Services
+﻿namespace ApimSidekick.MapsApi.Services
 {
     /// <summary>
     /// This provides interfaces to <see cref="MapServiceFactory"/>.

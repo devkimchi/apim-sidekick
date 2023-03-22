@@ -91,14 +91,17 @@ resource apimapipolicy 'Microsoft.ApiManagement/service/apis/policies@2021-08-01
     }
 }
 
-// resource apimproduct 'Microsoft.ApiManagement/service/products@2021-08-01' existing = {
-//   name: '${apim.name}/${apiManagement.productName}'
-//   scope: resourceGroup(apiManagement.groupName)
-// }
+resource apimproduct 'Microsoft.ApiManagement/service/products@2021-08-01' existing = {
+    name: '${apim.name}/${apiManagement.productName}'
+    scope: resourceGroup(apiManagement.groupName)
+}
 
-// resource apimproductapi 'Microsoft.ApiManagement/service/products/apis@2021-08-01' = {
-//   name: '${apimproduct.name}/${apiManagement.apiName}'
-// }
+resource apimproductapi 'Microsoft.ApiManagement/service/products/apis@2021-08-01' = {
+    name: '${apimproduct.name}/${apiManagement.apiName}'
+    dependsOn: [
+        apimapi
+    ]
+}
 
 var operations = [
     {

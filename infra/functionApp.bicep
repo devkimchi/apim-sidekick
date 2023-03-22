@@ -81,6 +81,11 @@ resource fncapp 'Microsoft.Web/sites@2022-03-01' = {
                     name: 'OpenApi__HostNames'
                     value: 'https://${apim.name}.azure-api.net/${apim.apiPath},https://${functionApp.name}.azurewebsites.net/api'
                 }
+                // Google Maps
+                {
+                    name: 'Maps__Google__ApiKey'
+                    value: 'to_be_updated'
+                }
             ]
         }
     }

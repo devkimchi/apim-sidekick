@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8B3C76EE-3788-43DF-80AD-0ADD21526394}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapsApi", "src\MapsApi\MapsApi.csproj", "{74860E3A-22FF-49B3-90CB-45197D692833}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "src\WebApp\WebApp.csproj", "{0B3C5308-D975-4D46-9F39-9818F66BDA66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74860E3A-22FF-49B3-90CB-45197D692833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74860E3A-22FF-49B3-90CB-45197D692833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74860E3A-22FF-49B3-90CB-45197D692833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74860E3A-22FF-49B3-90CB-45197D692833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B3C5308-D975-4D46-9F39-9818F66BDA66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B3C5308-D975-4D46-9F39-9818F66BDA66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B3C5308-D975-4D46-9F39-9818F66BDA66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B3C5308-D975-4D46-9F39-9818F66BDA66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{74860E3A-22FF-49B3-90CB-45197D692833} = {8B3C76EE-3788-43DF-80AD-0ADD21526394}
+		{0B3C5308-D975-4D46-9F39-9818F66BDA66} = {8B3C76EE-3788-43DF-80AD-0ADD21526394}
+	EndGlobalSection
+EndGlobal

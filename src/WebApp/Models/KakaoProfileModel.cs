@@ -1,9 +1,9 @@
-namespace IgniteSpotlight.WebApp.Models
+namespace ApimSidekick.WebApp.Models
 {
     public class KakaoProfileModel
     {
-        public string NickName { get; set;}
-        public string ProfileImageURL { get; set; }
-        public string ThumbnailURL { get; set; }
+        public string? NickName { get; set; }
+        public string? ProfileImageURL { get; set; }
+        public string? ThumbnailURL { get; set; }
     }
 }

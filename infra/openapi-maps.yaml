@@ -1,0 +1,76 @@
+openapi: 3.0.1
+info:
+  title: Google Maps API Wrapper
+  description: This is the facade API for Google Maps.
+  version: 1.0.0
+servers:
+  - url: http://localhost:7071/api
+paths:
+  /google:
+    get:
+      tags:
+        - google
+      operationId: GetGoogleMap
+      parameters:
+        - name: lat
+          in: query
+          description: The **latitude** parameter
+          required: true
+          schema:
+            type: string
+        - name: long
+          in: query
+          description: The **longitude** parameter
+          required: true
+          schema:
+            type: string
+        - name: zoom
+          in: query
+          description: The **zoom level** parameter &ndash; Default value is `14`
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The base64-encoded map image as an OK response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mapData'
+  /google/image:
+    get:
+      tags:
+        - google
+      operationId: GetGoogleMapImage
+      parameters:
+        - name: lat
+          in: query
+          description: The **latitude** parameter
+          required: true
+          schema:
+            type: string
+        - name: long
+          in: query
+          description: The **longitude** parameter
+          required: true
+          schema:
+            type: string
+        - name: zoom
+          in: query
+          description: The **zoom level** parameter &ndash; Default value is `14`
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The map image as an OK response
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    mapData:
+      type: object
+      properties:
+        base64Image:
+          type: string

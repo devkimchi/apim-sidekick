@@ -8,50 +8,12 @@ on:
     branches:
     - main
   workflow_dispatch:
-    inputs:
-      from_portal:
-        type: string
-        required: false
-        description: 'Value indicating whether it is triggered from Azure Portal or not. Default to `false`'
-        default: 'false'
-      azure_env_name:
-        type: string
-        required: false
-        description: 'Azure environment (resource) name'
-        default: ''
-      azure_location:
-        type: string
-        required: false
-        description: 'Azure resource location. Default to `koreacentral`'
-        default: 'koreacentral'
-      azure_subscription_id:
-        type: string
-        required: false
-        description: 'Azure subscription ID'
-        default: ''
-      # azure_principal_id:
-      #   type: string
-      #   required: false
-      #   description: 'Azure service principal ID'
-      #   default: ''
 
 permissions: write-all
 
 jobs:
-  # GitHub Secrets #
-  call_set_secrets:
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.from_portal == 'true'
-    uses: ./.github/workflows/workflow_call_set_secrets.yml
-    secrets: inherit
-    with:
-      azure_env_name: ${{ github.event.inputs.azure_env_name }}
-      azure_location: ${{ github.event.inputs.azure_location }}
-      azure_subscription_id: ${{ github.event.inputs.azure_subscription_id }}
-      # azure_principal_id: ${{ github.event.inputs.azure_principal_id }}
-
   # GitHub Push #
   call_build_test_upload:
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/workflow_call_build_test_upload.yml
     with:
       artifact_name: 'app'
@@ -65,7 +27,6 @@ jobs:
     secrets: inherit
     with:
       artifact_name: 'app'
-      github_branch_name: 'main'
 
   call_deploy_sttapp:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
@@ -75,11 +36,3 @@ jobs:
     secrets: inherit
     with:
       artifact_name: 'app'
-
-  # GitHub Pull Request #
-  call_build_test:
-    if: github.event_name == 'pull_request'
-    uses: ./.github/workflows/workflow_call_build_test_upload.yml
-    with:
-      artifact_name: 'app'
-      is_pullrequest: 'true'

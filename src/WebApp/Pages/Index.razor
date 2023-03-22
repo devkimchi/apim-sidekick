@@ -1,51 +1,44 @@
-﻿@page "/"
+@page "/"
 @using Configs
 
 @inject AppSettings Settings
 
 <PageTitle>Home</PageTitle>
 
-<h1>Ignite Spotlight on Korea</h1>
+<h1>APIM as a Sidekick</h1>
 
 <div class="card">
-  <h2 class="card-header">데모 1. 백엔드와 프론트엔드 디커플링하기</h2>
+  <h2 class="card-header">Demo #1. Decoupling front-end from back-end</h2>
   <div class="card-body">
-    <a class="btn btn-primary" href="/geolocation">프론트엔드</a>
-    <a class="btn btn-success" href="@mapsApi" target="_blank">백엔드</a>
+    <a class="btn btn-primary" href="/geolocation">Front-end: Blazor WASM</a>
+    <a class="btn btn-success" href="@mapsApi" target="_blank">Back-end: APIM</a>
   </div>
 </div>
 
 <div class="card">
-  <h2 class="card-header">데모 2. 코드 한 줄 없이 OAuth 인증 구현하기</h2>
+  <h2 class="card-header">Demo #2. Eash OAuth without coding</h2>
   <div class="card-body">
-    <a class="btn btn-primary" href="/kakaoprofile">프론트엔드</a>
+    <a class="btn btn-primary" href="/kakaoprofile">Front-end: Blazor WASM</a>
+    <a class="btn btn-success" href="@apimBackend" target="_blank">Back-end: APIM</a>
   </div>
 </div>
 
 <div class="card">
-  <h2 class="card-header">데모 3. 코드 한 줄 없이 BFF 구현하기</h2>
+  <h2 class="card-header">Demo #3. Building BFF without coding</h2>
   <div class="card-body">
-    <a class="btn btn-primary" href="https://make.powerautomate.com" target="_blank">프론트엔드</a>
-    <a class="btn btn-success" href="@smsApi" target="_blank">백엔드 1</a>
-    <a class="btn btn-success" href="@smsVerifyApi" target="_blank">백엔드 2</a>
+    <a class="btn btn-primary" href="https://make.powerapps.com" target="_blank">Front-end: Power Apps</a>
+    <a class="btn btn-success" href="@apimBackend" target="_blank">Back-end: APIM</a>
   </div>
 </div>
 
 @code {
     private string? mapsApi;
-    private string? kakaoApi;
-    private string? smsApi;
-    private string? smsVerifyApi;
+    private string? apimBackend;
 
     protected override void OnInitialized()
     {
-        // var links = Settings.Links;
-        var baseUrl = "https://apim-ignitekr2022.azure-api.net";
-
-        this.mapsApi = $"{baseUrl}/maps/swagger/ui";
-        this.kakaoApi = $"{baseUrl}/kakao/swagger/ui";
-        this.smsApi = $"{baseUrl}/sms/swagger/ui";
-        this.smsVerifyApi = $"{baseUrl}/sms/verify/swagger/ui";
+        this.mapsApi = $"https://apim-sidekick.azure-api.net/maps/swagger/ui";
+        this.apimBackend = "https://aka.ms/publicportal";
     }
 }
 

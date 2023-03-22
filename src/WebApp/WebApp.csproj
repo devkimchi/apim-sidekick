@@ -5,16 +5,16 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 
-    <AssemblyName>IgniteSpotlight.WebApp</AssemblyName>
-    <RootNamespace>IgniteSpotlight.WebApp</RootNamespace>
+    <AssemblyName>ApimSidekick.WebApp</AssemblyName>
+    <RootNamespace>ApimSidekick.WebApp</RootNamespace>
     <UserSecretsId>346dcef8-a668-43af-aa0e-41420df85dea</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazor.Geolocation.WebAssembly" Version="2.0.11" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.10" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+    <PackageReference Include="Blazor.Geolocation.WebAssembly" Version="2.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.*" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.*" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,11 +8,6 @@ on:
         required: false
         description: Artifact name
         default: 'app'
-      github_branch_name:
-        type: string
-        required: false
-        description: GitHub branch name
-        default: 'main'
 
 env:
   AZURE_RESOURCE_GROUP_NAME: 'rg-${{ secrets.AZURE_ENV_NAME }}'
@@ -24,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        app: [ { "suffix": "maps", "nv": "MAPS" }, { "suffix": "sms", "nv": "SMS" }, { "suffix": "sms-verify", "nv": "SMS_VERIFY" } ]
+        app: [ { "suffix": "maps", "nv": "MAPS" } ]
 
     env:
       AZURE_FNCAPP_NAME: 'fncapp-${{ secrets.AZURE_ENV_NAME }}-${{ matrix.app.suffix }}'
@@ -47,7 +42,10 @@ jobs:
     - name: Sign in to Azure
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        # creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: Deploy FunctionApp artifact to Azure
       shell: bash
@@ -63,31 +61,10 @@ jobs:
       if: matrix.app.suffix == 'maps'
       shell: bash
       run: |
-        fncapp_appsettings_navermap_clientid=$(az functionapp config appsettings set \
+        fncapp_appsettings_googlemap_apikey=$(az functionapp config appsettings set \
           -g ${{ env.AZURE_RESOURCE_GROUP_NAME }} \
           -n ${{ env.AZURE_FNCAPP_NAME }} \
-          --settings Maps__Naver__ClientId=${{ secrets.MAPS_NAVER_CLIENTID }})
-
-        fncapp_appsettings_navermap_clientsecret=$(az functionapp config appsettings set \
-          -g ${{ env.AZURE_RESOURCE_GROUP_NAME }} \
-          -n ${{ env.AZURE_FNCAPP_NAME }} \
-          --settings Maps__Naver__ClientSecret=${{ secrets.MAPS_NAVER_CLIENTSECRET }})
-
-    - name: Update app settings on FunctionApp - SMS/SMS-VERIFY
-      if: matrix.app.suffix != 'maps'
-      shell: bash
-      run: |
-        filename="appsettings-$(echo "${{ matrix.app.suffix }}" | sed s/-//).json"
-        uri="https://raw.githubusercontent.com/justinyoo/ignite-spotlight-demo/${{ inputs.github_branch_name }}/infra/$filename"
-        appsettings=$(curl $uri)
-        appsettings_length=$(echo $appsettings | jq '. | length')
-        for (( i=0; i<$appsettings_length; i++ ))
-        do
-          appsettings_name=$(echo $appsettings | jq --arg i "$i" '.[$i|fromjson].name' -r)
-          appsettings_value=$(echo $appsettings | jq --arg i "$i" '.[$i|fromjson].value' -r)
-
-          appsettings_updated=$(az functionapp config appsettings set -g ${{ env.AZURE_RESOURCE_GROUP_NAME }} -n ${{ env.AZURE_FNCAPP_NAME }} --settings $appsettings_name="$appsettings_value")
-        done
+          --settings Maps__Google__ApiKey=${{ secrets.MAPS_GOOGLE_API_KEY }})
 
     - name: Update function key on APIM
       shell: bash

@@ -4,7 +4,6 @@
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
 
-    "Maps__Naver__ClientId": "<NAVER_MAP_API_CLIENT_ID>",
-    "Maps__Naver__ClientSecret": "<NAVER_MAP_API_CLIENT_SECRET>"
+    "Maps__Google__ApiKey": "<GOOGLE_MAPS_API_KEY>"
   }
 }

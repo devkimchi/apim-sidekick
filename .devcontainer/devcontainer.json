@@ -5,9 +5,7 @@
     "dockerfile": "./Dockerfile",
     "context": ".",
     "args": {
-      // "VARIANT": "6.0-jammy"
-      // Use this only if you need Razor support, until OmniSharp supports .NET 6 properly
-      "VARIANT": "6.0-focal"
+      "VARIANT": "7.0"
     }
   },
 
@@ -25,24 +23,24 @@
 
   "features": {
     // Uncomment the below to install Azure CLI
-    "ghcr.io/devcontainers/features/azure-cli:1": {
+    "ghcr.io/devcontainers/features/azure-cli:latest": {
       "version": "latest"
     },
 
     // Uncomment the below to install GitHub CLI
-    "ghcr.io/devcontainers/features/github-cli:1": {
+    "ghcr.io/devcontainers/features/github-cli:latest": {
       "version": "latest"
     },
 
     // Uncomment the below to install node.js
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "16",
+    "ghcr.io/devcontainers/features/node:latest": {
+      "version": "latest",
       "nodeGypDependencies": true,
       "nvmInstallPath": "/usr/local/share/nvm"
     },
 
     // Install common utilities
-    "ghcr.io/devcontainers/features/common-utils:1": {
+    "ghcr.io/devcontainers/features/common-utils:latest": {
       "installZsh": true,
       "installOhMyZsh": true,
       "upgradePackages": true,
@@ -119,7 +117,7 @@
         "gitlens.showWhatsNewAfterUpgrades": false,
 
         // Uncomment if you prefer the light colour theme
-        // "workbench.colorTheme": "Default Light+",
+        "workbench.colorTheme": "Default Light+",
 
         // Recommended settings for the explorer pane
         "explorer.sortOrder": "type",

@@ -1,5 +1,5 @@
-using IgniteSpotlight.WebApp;
-using IgniteSpotlight.WebApp.Configs;
+using ApimSidekick.WebApp;
+using ApimSidekick.WebApp.Configs;
 
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Http;
 
-namespace IgniteSpotlight.MapsApi.Services
+namespace ApimSidekick.MapsApi.Services
 {
     /// <summary>
     /// This provides interfaces to map services.

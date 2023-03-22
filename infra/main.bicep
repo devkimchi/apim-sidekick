@@ -3,48 +3,22 @@ targetScope = 'subscription'
 param name string
 param location string = 'Korea Central'
 
-param apiManagementPublisherName string = 'Ignite Spotlight Demo'
+param apiManagementPublisherName string = 'APIM Sidekick Demo'
 param apiManagementPublisherEmail string = 'apim@contoso.com'
-param gitHubBranchName string = 'main'
+
 @secure()
-param gitHubAccessToken string
+param gitHubUsername string
+param gitHubRepositoryName string
+param gitHubBranchName string = 'main'
 
 var apps = [
     {
         suffix: 'maps'
         apiName: 'MAPS'
         apiPath: 'maps'
-        apiFormat: 'openapi+json-link'
-        apiExtension: 'json'
+        apiFormat: 'openapi-link'
+        apiExtension: 'yaml'
     }
-    {
-        suffix: 'sms'
-        apiName: 'SMS'
-        apiPath: 'sms'
-        apiFormat: 'openapi+json-link'
-        apiExtension: 'json'
-    }
-    {
-        suffix: 'sms-verify'
-        apiName: 'SMS-VERIFY'
-        apiPath: 'sms/verify'
-        apiFormat: 'openapi+json-link'
-        apiExtension: 'json'
-    }
-    // {
-    //     suffix: 'bff'
-    //     apiName: 'BFF'
-    //     apiPath: 'bff'
-    //     apiFormat: 'openapi-link'
-    //     apiExtension: 'yaml'
-    // }
-    // {
-    //     suffix: 'kakao'
-    //     apiName: 'KAKAO'
-    //     apiPath: 'kakao'
-    //     apiFormat: 'openapi-link'
-    //     apiExtension: 'yaml'
-    // }
 ]
 var storageContainerName = 'openapis'
 
@@ -69,10 +43,12 @@ module apim './provision-apiManagement.bicep' = {
         name: name
         location: location
         storageContainerName: storageContainerName
+        gitHubUsername: gitHubUsername
+        gitHubRepositoryName: gitHubRepositoryName
         apiMgmtPublisherName: apiManagementPublisherName
         apiMgmtPublisherEmail: apiManagementPublisherEmail
         apiMgmtPolicyFormat: 'xml-link'
-        apiMgmtPolicyValue: 'https://raw.githubusercontent.com/justinyoo/ignite-spotlight-demo/${gitHubBranchName}/infra/apim-global-policy.xml'
+        apiMgmtPolicyValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-global-policy.xml'
         staticWebAppHostname: sttapp.outputs.hostname
     }
 }
@@ -111,9 +87,9 @@ module apis './provision-apiManagementApi.bicep' = [for (app, index) in apps: {
         apiMgmtApiServiceUrl: 'https://fncapp-${name}-${app.suffix}.azurewebsites.net/api'
         apiMgmtApiPath: app.apiPath
         apiMgmtApiFormat: app.apiFormat
-        apiMgmtApiValue: 'https://raw.githubusercontent.com/justinyoo/ignite-spotlight-demo/${gitHubBranchName}/infra/openapi-${replace(toLower(app.apiName), '-', '')}.${app.apiExtension}'
+        apiMgmtApiValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/openapi-${replace(toLower(app.apiName), '-', '')}.${app.apiExtension}'
         apiMgmtApiPolicyFormat: 'xml-link'
-        apiMgmtApiPolicyValue: 'https://raw.githubusercontent.com/justinyoo/ignite-spotlight-demo/${gitHubBranchName}/infra/apim-api-policy-${replace(toLower(app.apiName), '-', '')}.xml'
+        apiMgmtApiPolicyValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-api-policy-${replace(toLower(app.apiName), '-', '')}.xml'
     }
 }]
 
