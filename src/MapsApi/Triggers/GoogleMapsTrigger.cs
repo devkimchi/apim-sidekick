@@ -53,7 +53,7 @@ namespace ApimSidekick.MapsApi
         [OpenApiParameter(name: "zoom", In = ParameterLocation.Query, Required = false, Type = typeof(string), Description = "The **zoom level** parameter &ndash; Default value is `14`")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(MapData), Description = "The base64-encoded map image as an OK response")]
         public async Task<IActionResult> GetGoogleMap(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "GET", Route = "google")] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Function, "GET", Route = "google")] HttpRequest req)
         {
             this._logger.LogInformation("C# HTTP trigger function processed a request.");
 
