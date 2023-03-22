@@ -12,7 +12,7 @@
   <inbound>
     <cors allow-credentials="true">
       <allowed-origins>
-        <origin>https://{{RESOURCE_NAME}}.azure-api.net</origin>
+        <origin>https://apim{{AZURE_ENV_NAME}}.azure-api.net</origin>
         <origin>https://flow.microsoft.com</origin>
         <origin>https://make.powerapps.com</origin>
         <origin>https://make.powerautomate.com</origin>
@@ -32,18 +32,5 @@
     <forward-request />
   </backend>
   <outbound />
-  <on-error>
-    <choose>
-      <when condition="@(context.LastError.Reason == &quot;OperationNotFound&quot;)">
-        <return-response>
-          <set-status code="301" reason="Moved Permanently" />
-          <set-header name="Location" exists-action="override">
-            <value>https://{{STTAPP_HOST}}</value>
-            <!-- <value>https://github.com/justinyoo/ignite-spotlight-demo</value> -->
-            <!-- <value>https://{{RESOURCE_NAME}}.azure-api.net/maps/swagger/ui</value> -->
-          </set-header>
-        </return-response>
-      </when>
-    </choose>
-  </on-error>
+  <on-error />
 </policies>
