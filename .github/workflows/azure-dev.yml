@@ -16,7 +16,6 @@ jobs:
     uses: ./.github/workflows/workflow_call_build_test_upload.yml
     with:
       artifact_name: 'app'
-      is_pullrequest: 'false'
 
   call_deploy_fncapp:
     uses: ./.github/workflows/workflow_call_deploy_fncapp.yml
