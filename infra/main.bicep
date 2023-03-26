@@ -72,7 +72,7 @@ module apim './provision-apiManagement.bicep' = {
         apiMgmtPublisherName: apiManagementPublisherName
         apiMgmtPublisherEmail: apiManagementPublisherEmail
         apiMgmtPolicyFormat: 'xml-link'
-        apiMgmtPolicyValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-global-policy.xml'
+        apiMgmtPolicyValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-policy-global.xml'
         staticWebAppHostname: sttapp.outputs.hostname
     }
 }
@@ -114,6 +114,6 @@ module apis './provision-apiManagementApi.bicep' = [for (app, index) in apps: {
         apiMgmtApiValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/openapi-${replace(toLower(app.apiName), '-', '')}.${app.apiExtension}'
         apiMgmtApiPolicyFormat: 'xml-link'
         apiMgmtApiPolicyValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-policy-api-${replace(toLower(app.apiName), '-', '')}.xml'
-        apiOperations: app.apiOperations
+        apiManagementApiOperations: app.apiOperations
     }
 }]
