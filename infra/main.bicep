@@ -18,6 +18,30 @@ var apps = [
         apiPath: 'maps'
         apiFormat: 'openapi-link'
         apiExtension: 'yaml'
+        apiOperations: []
+    }
+    {
+        suffix: 'kakao'
+        apiName: 'KAKAO'
+        apiPath: 'kakao'
+        apiFormat: 'openapi-link'
+        apiExtension: 'yaml'
+        apiOperations: [
+            {
+                name: 'AccessToken'
+                policy: {
+                    format: 'xml-link'
+                    value: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-policy-api-kakao-op-accesstoken.xml'
+                }
+            }            
+            {
+                name: 'Profile'
+                policy: {
+                    format: 'xml-link'
+                    value: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-policy-api-kakao-op-profile.xml'
+                }
+            }            
+        ]
     }
 ]
 var storageContainerName = 'openapis'
@@ -89,6 +113,7 @@ module apis './provision-apiManagementApi.bicep' = [for (app, index) in apps: {
         apiMgmtApiFormat: app.apiFormat
         apiMgmtApiValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/openapi-${replace(toLower(app.apiName), '-', '')}.${app.apiExtension}'
         apiMgmtApiPolicyFormat: 'xml-link'
-        apiMgmtApiPolicyValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-api-policy-${replace(toLower(app.apiName), '-', '')}.xml'
+        apiMgmtApiPolicyValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-policy-api-${replace(toLower(app.apiName), '-', '')}.xml'
+        apiOperations: app.apiOperations
     }
 }]
