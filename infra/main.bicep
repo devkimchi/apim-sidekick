@@ -13,17 +13,21 @@ param gitHubBranchName string = 'main'
 
 var apps = [
     {
+        isFunctionApp: true
         suffix: 'maps'
         apiName: 'MAPS'
         apiPath: 'maps'
+        apiBackendUrl: 'https://fncapp-{{AZURE_ENV_NAME}}-maps.azurewebsites.net/api'
         apiFormat: 'openapi-link'
         apiExtension: 'yaml'
         apiOperations: []
     }
     {
+        isFunctionApp: false
         suffix: 'kakao'
         apiName: 'KAKAO'
         apiPath: 'kakao'
+        apiBackendUrl: 'https://kapi.kakao.com'
         apiFormat: 'openapi-link'
         apiExtension: 'yaml'
         apiOperations: [
@@ -77,7 +81,7 @@ module apim './provision-apiManagement.bicep' = {
     }
 }
 
-module fncapps './provision-functionApp.bicep' = [for (app, index) in apps: {
+module fncapps './provision-functionApp.bicep' = [for (app, index) in apps: if(app.isFunctionApp == true) {
     name: 'FunctionApp_${app.suffix}'
     scope: rg
     dependsOn: [
@@ -108,12 +112,13 @@ module apis './provision-apiManagementApi.bicep' = [for (app, index) in apps: {
         apiMgmtApiName: app.apiName
         apiMgmtApiDisplayName: app.apiName
         apiMgmtApiDescription: app.apiName
-        apiMgmtApiServiceUrl: 'https://fncapp-${name}-${app.suffix}.azurewebsites.net/api'
+        apiMgmtApiServiceUrl: app.apiBackendUrl
         apiMgmtApiPath: app.apiPath
         apiMgmtApiFormat: app.apiFormat
         apiMgmtApiValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/openapi-${replace(toLower(app.apiName), '-', '')}.${app.apiExtension}'
         apiMgmtApiPolicyFormat: 'xml-link'
         apiMgmtApiPolicyValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-policy-api-${replace(toLower(app.apiName), '-', '')}.xml'
+        apiMgmtProvisionOpenApiOperations: app.isFunctionApp
         apiManagementApiOperations: app.apiOperations
     }
 }]
