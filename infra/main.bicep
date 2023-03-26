@@ -112,7 +112,7 @@ module apis './provision-apiManagementApi.bicep' = [for (app, index) in apps: {
         apiMgmtApiName: app.apiName
         apiMgmtApiDisplayName: app.apiName
         apiMgmtApiDescription: app.apiName
-        apiMgmtApiServiceUrl: app.apiBackendUrl
+        apiMgmtApiServiceUrl: replace(app.apiBackendUrl, '{{AZURE_ENV_NAME}}', '${name}')
         apiMgmtApiPath: app.apiPath
         apiMgmtApiFormat: app.apiFormat
         apiMgmtApiValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/openapi-${replace(toLower(app.apiName), '-', '')}.${app.apiExtension}'
