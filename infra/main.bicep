@@ -92,18 +92,3 @@ module apis './provision-apiManagementApi.bicep' = [for (app, index) in apps: {
         apiMgmtApiPolicyValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-api-policy-${replace(toLower(app.apiName), '-', '')}.xml'
     }
 }]
-
-// module depscrpt './deploymentScript.bicep' = {
-//     name: 'DeploymentScript'
-//     scope: rg
-//     dependsOn: [
-//         apim
-//         fncapps
-//     ]
-//     params: {
-//         name: name
-//         location: location
-//         gitHubBranchName: gitHubBranchName
-//         gitHubAccessToken: gitHubAccessToken
-//     }
-// }
