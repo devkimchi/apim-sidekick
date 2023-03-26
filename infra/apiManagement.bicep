@@ -56,6 +56,10 @@ var dicts = [
         value: apiManagement.gitHubRepositoryName
     }
     {
+        name: 'STTAPP_HOST'
+        value: 'to_be_updated'
+    }
+    {
         name: 'X_FUNCTIONS_KEY_MAPS'
         value: 'to_be_updated'
     }
